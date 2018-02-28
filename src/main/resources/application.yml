@@ -1,0 +1,11 @@
+#default url : localhost:port
+server:
+  port: 8090
+      
+spring: 
+  application: 
+    name: Demo project
+  mvc: 
+    view: 
+      prefix: /WEB-INF/views/
+      suffix: .jsp
