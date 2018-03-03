@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DataSourceConfig {
+	//設定連線資訊
 	@Bean
 	public DataSource jdbcDataSource(){
 		BasicDataSource ds = new BasicDataSource();

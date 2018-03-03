@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ntut.practice.demo.service.MemberService;
 
-@Controller
+@Controller 
+@RequestMapping(value = "example")
 public class ExampleController {
 
 	@Autowired
@@ -23,13 +24,13 @@ public class ExampleController {
 		return "Hi,this is a test for spring mvc";
 	}
 	
-	@PostMapping("printMemberData") // 等同於 @RequestMapping(value = "printMemberData", method = RequestMethod.POST)
+	@GetMapping("printMemberData") // 等同於 @RequestMapping(value = "printMemberData", method = RequestMethod.GET)
 	public String printMemberData(@RequestParam("email") String mail) {
 		memberService.getMemberBy(mail);
 		return "member/memberProfile"; // 導引至 WEB-INF/views member/memberProfile .jsp
 	}
 	
-	@GetMapping("errorTest")
+	@PostMapping("errorTest")
 	public String errorTest(){
 		if(true){
 			throw new RuntimeException("Hi, there");
