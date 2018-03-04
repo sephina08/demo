@@ -99,3 +99,6 @@ buildNumber.properties
 
 
 # End of https://www.gitignore.io/api/java,maven,eclipse
+
+.idea/
+demo.iml

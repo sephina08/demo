@@ -9,3 +9,8 @@ spring:
     view: 
       prefix: /WEB-INF/views/
       suffix: .jsp
+
+project:
+    page:
+      index: index
+      error: err
