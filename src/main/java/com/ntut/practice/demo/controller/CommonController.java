@@ -12,5 +12,5 @@ public class CommonController {
 	public String indexPage() {
 		return "index";
 	}
-
+	
 }

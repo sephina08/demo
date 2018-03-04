@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ntut.practice.demo.service.MemberService;
+import com.ntut.practice.demo.service.member.MemberService;
 
 @Controller 
 @RequestMapping(value = "example")
@@ -37,4 +37,15 @@ public class ExampleController {
 		}
 		return null;
 	}
+	
+	@PostMapping("SigninServlet.do")
+	public String signin(){
+		
+		
+		
+		
+		return null;
+	}
+	
+	
 }
