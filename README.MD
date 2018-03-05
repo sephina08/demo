@@ -1,18 +1,18 @@
 ### READ
-- Spring Boot Application
-- Spring MVC (base on JSP)
-- MySQL
-- Maven
-- Git
-- 測試範例參考 **develop** 分支中的`src/test/java/com/ntut/practice/demo/ValidateTest.java`
+1. Spring Boot Application
+2. Spring MVC (base on JSP)
+3. MySQL
+4. Maven
+5. Git
 
 ---
 
 ### TODO
 
 - [x] Spring Boot 建置與設定
-- [x] 測試範例
-- [x] 統一錯誤管理 `@ControllerAdvice`
+- [x] 整合測試範例 
+> 參考 **develop** 分支中的
+> `src/test/java/com/ntut/practice/demo/ValidateTest.java`
 - [ ] LOG 設定
 - [ ] AOP 範例
-- [ ] DDL
+- [ ] DDL 資料夾
