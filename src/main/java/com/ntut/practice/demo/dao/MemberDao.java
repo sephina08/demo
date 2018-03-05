@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository //DAO
 public class MemberDao extends BaseDao{
 
 	public String getMemberBy(String mail){

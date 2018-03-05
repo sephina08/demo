@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ntut.practice.demo.dao.MemberDao;
 
-@Service
+@Service //商又邏輯
 public class MemberService {
 	
 	@Autowired

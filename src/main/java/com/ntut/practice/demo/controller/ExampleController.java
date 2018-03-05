@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ntut.practice.demo.service.MemberService;
 
@@ -36,5 +37,13 @@ public class ExampleController {
 			throw new RuntimeException("Hi, there");
 		}
 		return null;
+	}
+	
+	@GetMapping("testForPutAttribute") 
+	public ModelAndView printMemberData() {
+		ModelAndView rs = new ModelAndView("test/attributes");
+		rs.addObject("myName", "KB");
+		rs.addObject("myAge", 27);
+		return rs; 
 	}
 }

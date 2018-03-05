@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Index</h1>
-	<a href="/WEB-INF/views/product/newProduct.jsp">商品</a>
+	<form action="">
+		
+	</form>
 </body>
 </html>
