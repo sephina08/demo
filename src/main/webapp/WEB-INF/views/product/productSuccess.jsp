@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>新增商品成功</title>
 </head>
 <body>
-	<form action="">
-		
-	</form>
+	<h1>您已成功上架一件商品</h1>
 </body>
 </html>
