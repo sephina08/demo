@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Repository;
 
 import com.ntut.practice.demo.dao.BaseDao;
 import com.ntut.practice.demo.model.product.ProductBean;
 
+@Repository //受spring控管的dao
 public class ProductDAO extends BaseDao implements  IProductDAO{
 	private String INSERTSQL = "INSERT INTO PRODUCT "
 							+ "(PD_Name , PD_Number , "
@@ -27,10 +29,12 @@ public class ProductDAO extends BaseDao implements  IProductDAO{
 			stmt.setString(4, bean.getProductDesc());
 			stmt.setInt(5, bean.getStockNumber());
 			stmt.setString(6, bean.getImageName());
-			stmt.setBlob(7, bean.getProductImage());
+			stmt.setString(7, bean.getProductImage());
 			stmt.executeUpdate();
 		} catch (SQLException e) {	
 			e.printStackTrace();
+			System.out.println("dao error");
+			System.out.println("dao error msg = "+e.getMessage());
 		}
 		
 	}

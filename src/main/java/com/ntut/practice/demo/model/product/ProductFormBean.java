@@ -2,7 +2,6 @@ package com.ntut.practice.demo.model.product;
 
 import java.sql.Blob;
 
-
 public class ProductFormBean {
 	
 	private String pName;
@@ -11,9 +10,33 @@ public class ProductFormBean {
 	private String pDesc;
 	private Integer sNumber;
 	private String iName;
-	private Blob pImage;
+	private String pImage;
 	
 	
+	
+	public ProductFormBean() {
+		super();
+	}
+	public ProductFormBean(String pName, Integer pNumber, double price, String pDesc, Integer sNumber, String iName) {
+		super();
+		this.pName = pName;
+		this.pNumber = pNumber;
+		this.price = price;
+		this.pDesc = pDesc;
+		this.sNumber = sNumber;
+		this.iName = iName;
+	}
+	public ProductFormBean(String pName, Integer pNumber, double price, String pDesc, Integer sNumber, String iName,
+			String pImage) {
+		super();
+		this.pName = pName;
+		this.pNumber = pNumber;
+		this.price = price;
+		this.pDesc = pDesc;
+		this.sNumber = sNumber;
+		this.iName = iName;
+		this.pImage = pImage;
+	}
 	public String getpName() {
 		return pName;
 	}
@@ -50,11 +73,15 @@ public class ProductFormBean {
 	public void setiName(String iName) {
 		this.iName = iName;
 	}
-	public Blob getpImage() {
+	public String getpImage() {
 		return pImage;
 	}
-	public void setpImage(Blob pImage) {
+	public void setpImage(String pImage) {
 		this.pImage = pImage;
 	}
+	
+	
+	
+	
 	
 }

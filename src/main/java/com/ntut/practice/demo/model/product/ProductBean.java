@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Clob;
 
-
-
-
-
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 public class ProductBean implements Serializable {
 	
@@ -21,12 +18,7 @@ public class ProductBean implements Serializable {
 	private String imageName;
 	private String software;
 	private Clob softDesc;
-	private Blob productImage;
-	
-	
-	
-	
-	
+	private String productImage;
 	public Integer getId() {
 		return id;
 	}
@@ -81,11 +73,13 @@ public class ProductBean implements Serializable {
 	public void setSoftDesc(Clob softDesc) {
 		this.softDesc = softDesc;
 	}
-	public Blob getProductImage() {
+	public String getProductImage() {
 		return productImage;
 	}
-	public void setProductImage(Blob productImage) {
+	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
+	
+
 	
 }
