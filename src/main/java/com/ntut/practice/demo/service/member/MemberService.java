@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ntut.practice.demo.dao.member.MemberDao;
 import com.ntut.practice.demo.model.member.MemberBean;
 import com.ntut.practice.demo.model.member.MemberFormBean;
-import com.ntut.practice.demo.service.ValidateService;
+import com.ntut.practice.demo.service.utils.ValidateService;
 
 @Service
 public class MemberService {

@@ -1,4 +1,4 @@
-package com.ntut.practice.demo.service;
+package com.ntut.practice.demo.service.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

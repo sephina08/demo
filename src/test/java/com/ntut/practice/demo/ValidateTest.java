@@ -1,7 +1,7 @@
 package com.ntut.practice.demo;
 
 import com.ntut.practice.demo.model.member.MemberFormBean;
-import com.ntut.practice.demo.service.ValidateService;
+import com.ntut.practice.demo.service.utils.ValidateService;
 import com.ntut.practice.demo.service.member.MemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

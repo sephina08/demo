@@ -13,7 +13,7 @@ public class DataSourceConfig {
 	public DataSource jdbcDataSource(){
 		BasicDataSource ds = new BasicDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/fcdb");
+		ds.setUrl("jdbc:mysql://localhost:3306/wime");
 		ds.setConnectionProperties("useSSL=true;useUnicode=yes;characterEncoding=utf8");
 		ds.setUsername("admin");
 		ds.setPassword("1a2b");
