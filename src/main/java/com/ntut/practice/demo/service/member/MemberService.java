@@ -19,14 +19,45 @@ public class MemberService {
 	@Autowired
 	private ValidateService validateService;
 
-	public void getMemberBy(String mail) {
-		memberDao.getMemberBy(mail);
+	// 查詢會員
+	/**
+	 * TODO: A to B
+	 * 
+	 * @param mail
+	 * @return
+	 */
+	public MemberFormBean getMemberByEmail(String mail) {
+		MemberBean bean = memberDao.getMemberByEmail(mail);
+		MemberFormBean memberFormBean = new MemberFormBean();
+		memberFormBean.setName(bean.getUserName());
+		memberFormBean.setEmail(bean.getUserEmail());
+		memberFormBean.setFirstName(bean.getUserFirstName());
+		memberFormBean.setLastName(bean.getuserLastName());
+		memberFormBean.setMobile(bean.getUserMobile());
+		memberFormBean.setTel(bean.getUserTel());
+		memberFormBean.setTelExt(bean.getUserTelExt());
+		return memberFormBean;
 	}
 
-	// TODO想一個方法把INSERTDAO寫進去
+	// 修改會員
+	public void updateConsumer(MemberFormBean memberFormBean) {
+		MemberBean bean = new MemberBean();
+		bean.setUserEmail(memberFormBean.getEmail());
+		bean.setuserLastName(memberFormBean.getLastName());
+		bean.setUserFirstName(memberFormBean.getFirstName());
+		// bean.setUserAddress(memberFormBean.getAddress());
+		bean.setUserMobile(memberFormBean.getMobile());
+		bean.setUserTel(memberFormBean.getTel());
+		bean.setUserTelExt(memberFormBean.getTelExt());
+		System.out.println();
+
+		memberDao.updateUser(bean);
+	}
+
+	// 使用者輸入正確傳值到dao
+	// TODO想一個都沒有錯誤訊息,成功的方法把INSERTDAO寫進去
 	// controller不能直接呼叫dao不然會資料結構外洩,Service也不能資料結構外洩,所以用controller的MemberFormBean去setMemberBean
 	public void insertMember(MemberFormBean memberFormBean) {
-
 		MemberBean bean = new MemberBean();
 		bean.setUserEmail(memberFormBean.getEmail());
 		bean.setUserPasswd(memberFormBean.getPassword());
@@ -41,6 +72,18 @@ public class MemberService {
 		memberDao.insertUser(bean);
 	}
 
+	// 刪除會員
+	/**
+	 * 
+	 * @param
+	 *
+	 */
+	public void delectMember(String mail) {
+		memberDao.delete(mail);
+
+	}
+
+	
 	// 檢查使用者表單的錯誤訊息,如果有錯誤用 Map格式回傳
 	public Map<String, String> check(MemberFormBean bean) {
 		Map<String, String> errorMessage = new HashMap<>();

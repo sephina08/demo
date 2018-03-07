@@ -17,11 +17,6 @@ public class DaoTest {
     private MemberDao memberDao;
 
     @Test
-    public void getgetMemberByTest() {
-        memberDao.getMemberBy("cc@cc");
-    }
-
-    @Test
     public void insertInTo() {
         MemberBean bean = new MemberBean();
         bean.setUserName("dd@dd");
@@ -35,5 +30,30 @@ public class DaoTest {
         memberDao.insertUser(bean);
 
     }
+    
+    @Test
+	public void updateConsuner() {
+		MemberBean bean = new MemberBean();
+		bean.setUserName("dd@dd");
+		bean.setUserEmail("dd@dd");
+		bean.setuserLastName("詹");
+		bean.setUserFirstName("仔子");
+		bean.setUserPasswd("d1d1d1d1");
+		bean.setUserMobile("0987349263");
+		bean.setUserTel("27948392");
+		bean.setUserTelExt("333");
+		memberDao.updateUser(bean);
+
+	}
+
+	@Test
+	public void getMemberByTest() {
+		memberDao.getMemberByEmail("aa@aa");
+	}
+	
+	@Test
+	public void deleteMember(){
+		memberDao.delete("dd@dd");
+	}
 
 }

@@ -49,5 +49,4 @@ public class ValidateTest {
         Map<String, String> checkResult = memberService.check(mfb);
         assertThat(checkResult.size()).isEqualTo(0);
     }
-
 }
