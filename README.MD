@@ -13,5 +13,5 @@
 - [x] 整合測試範例 
 > 參考 **develop** 分支中的 `src/test/java/com/ntut/practice/demo/ValidateTest.java`
 - [X] LOG 設定
-- [ ] AOP 範例
+- [X] AOP 範例
 - [ ] DDL 資料夾
