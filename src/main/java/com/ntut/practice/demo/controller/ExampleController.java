@@ -26,7 +26,7 @@ public class ExampleController {
 	
 	@GetMapping("printMemberData") // 等同於 @RequestMapping(value = "printMemberData", method = RequestMethod.GET)
 	public String printMemberData(@RequestParam("email") String mail) {
-		memberService.getMemberBy(mail);
+		memberService.getMemberByEmail(mail);
 		return "member/memberProfile"; // 導引至 WEB-INF/views member/memberProfile .jsp
 	}
 	

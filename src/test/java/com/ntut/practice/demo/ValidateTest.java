@@ -6,32 +6,32 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ntut.practice.demo.config.DataSourceConfig;
 import com.ntut.practice.demo.model.member.MemberFormBean;
-import com.ntut.practice.demo.service.ValidateService;
 import com.ntut.practice.demo.service.member.MemberService;
-
+import com.ntut.practice.demo.service.member.ValidateService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class)
+@SpringBootTest(classes = {Application.class,DataSourceConfig.class}, webEnvironment = WebEnvironment.NONE)
 public class ValidateTest {
 
 	@Autowired
 	private ValidateService validateService;
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Test
 	public void validateMailTest() {
 		boolean validateMail = validateService.validateMail("123");
-		assertThat(validateMail).isEqualTo(false);//assertThat斷言,isEqualTo是等於
+		assertThat(validateMail).isEqualTo(false);// assertThat斷言,isEqualTo是等於
 	}
-	
+
 	@Test
 	public void validateMemberTest() {
 		MemberFormBean mfb = new MemberFormBean();
@@ -46,5 +46,5 @@ public class ValidateTest {
 		Map<String, String> checkResult = memberService.check(mfb);
 		assertThat(checkResult.size()).isEqualTo(0);
 	}
-	
+
 }
