@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>新增商品成功</title>
 </head>
 <body>
-	This is error page.
-	Error occurred due to ${errorType} 
-	<br>
-	detail: 
-	${errorMessage}
+	<h1>您已成功上架一件商品</h1>
 </body>
-</html> 
+</html>
