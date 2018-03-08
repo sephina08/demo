@@ -1,22 +1,32 @@
 package com.ntut.practice.demo.config;
 
-import javax.sql.DataSource;
-
+import com.ntut.practice.demo.config.prop.JdbcConfig;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class DataSourceConfig {
-	//設定連線資訊
-	@Bean
-	public DataSource jdbcDataSource(){
-		BasicDataSource ds = new BasicDataSource();
-		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/zoo");
-		ds.setConnectionProperties("useSSL=true;useUnicode=yes;characterEncoding=utf8");
-		ds.setUsername("admin");
-		ds.setPassword("1a2b");
-		return ds;
-	}
+
+    @Autowired
+    private JdbcConfig jdbcConfig;
+
+    /**
+     * 設定連線資訊，資料源 {@link com.ntut.practice.demo.config.prop.JdbcConfig}
+     *
+     * @return
+     */
+    @Bean
+    public DataSource jdbcDataSource() {
+        BasicDataSource ds = new BasicDataSource();
+        ds.setDriverClassName(jdbcConfig.getDriverClassName());
+        ds.setUrl(jdbcConfig.getUrl());
+        ds.setConnectionProperties(jdbcConfig.getConnectionProperties());
+        ds.setUsername(jdbcConfig.getUserName());
+        ds.setPassword(jdbcConfig.getPassword());
+        return ds;
+    }
 }

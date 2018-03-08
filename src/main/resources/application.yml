@@ -14,3 +14,10 @@ project:
     page:
       index: index
       error: err
+
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/zoo
+  connectionProperties: useSSL=true;useUnicode=yes;characterEncoding=utf8
+  userName: admin
+  password: 1a2b
