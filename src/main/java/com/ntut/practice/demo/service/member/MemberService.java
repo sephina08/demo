@@ -1,11 +1,16 @@
 package com.ntut.practice.demo.service.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ntut.practice.demo.Application;
 import com.ntut.practice.demo.dao.member.MemberDao;
 import com.ntut.practice.demo.model.member.MemberBean;
 import com.ntut.practice.demo.model.member.MemberFormBean;
@@ -14,22 +19,21 @@ import com.ntut.practice.demo.service.utils.ValidateService;
 @Service
 public class MemberService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
 	private ValidateService validateService;
 
-	// 查詢會員
 	/**
-	 * TODO: A to B
+	 * 查詢會員 TODO: A to B
 	 * 
 	 * @param mail
-	 * @return
 	 */
 	public MemberFormBean getMemberByEmail(String mail) {
 		MemberBean bean = memberDao.getMemberByEmail(mail);
 		MemberFormBean memberFormBean = new MemberFormBean();
-		memberFormBean.setName(bean.getUserName());
 		memberFormBean.setEmail(bean.getUserEmail());
 		memberFormBean.setFirstName(bean.getUserFirstName());
 		memberFormBean.setLastName(bean.getuserLastName());
@@ -39,8 +43,48 @@ public class MemberService {
 		return memberFormBean;
 	}
 
+	/**
+	 * 查詢所有的會員資料 從dao拿到所有的會員資料包在list裡面 TODO:用for迴圈把值全部帶出來 A to B
+	 */
+
+	public List<MemberFormBean> getAllMember() {
+		List<MemberFormBean> result = new ArrayList<>();
+		List<MemberBean> allMember = memberDao.getAllMember();
+		for (MemberBean mb : allMember) {
+			MemberFormBean mfb = new MemberFormBean();
+			// AtoB
+			mfb.setEmail(mb.getUserEmail());
+			mfb.setFirstName(mb.getUserFirstName());
+			mfb.setLastName(mb.getuserLastName());
+			mfb.setMobile(mb.getUserMobile());
+			mfb.setTel(mb.getUserTel());
+			mfb.setTelExt(mb.getUserTelExt());
+			result.add(mfb);
+//			Map<String, String> errorMessage = new HashMap<>();
+//			String email = mfb.getEmail();
+//			if (email == null || email.trim().length() == 0) {
+//				errorMessage.put("email", "電子信箱不存在");
+//			}
+
+		}
+		return result;
+
+	}
+
+	//
+	// //查詢使用者資料,檢查電子信箱是否存在
+	// public Map<String, String> checkEmail(MemberFormBean bean){
+	// Map<String, String> errorMessage = new HashMap<>();
+	// String email = bean.getEmail();
+	// if (email == null || email.trim().length() == 0) {
+	// errorMessage.put("email", "電子信箱不存在");
+	// }
+	// return errorMessage;
+	//
+	// }
+
 	// 修改會員
-	public void updateConsumer(MemberFormBean memberFormBean) {
+	public int updateConsumer(MemberFormBean memberFormBean) {
 		MemberBean bean = new MemberBean();
 		bean.setUserEmail(memberFormBean.getEmail());
 		bean.setuserLastName(memberFormBean.getLastName());
@@ -49,9 +93,9 @@ public class MemberService {
 		bean.setUserMobile(memberFormBean.getMobile());
 		bean.setUserTel(memberFormBean.getTel());
 		bean.setUserTelExt(memberFormBean.getTelExt());
-		System.out.println();
-
-		memberDao.updateUser(bean);
+		int updateCount = memberDao.updateUser(bean);
+		LOGGER.debug("update count:{}", updateCount);
+		return updateCount;
 	}
 
 	// 使用者輸入正確傳值到dao
@@ -72,18 +116,14 @@ public class MemberService {
 		memberDao.insertUser(bean);
 	}
 
-	// 刪除會員
 	/**
-	 * 
-	 * @param
-	 *
+	 * 刪除會員
 	 */
 	public void delectMember(String mail) {
 		memberDao.delete(mail);
 
 	}
 
-	
 	// 檢查使用者表單的錯誤訊息,如果有錯誤用 Map格式回傳
 	public Map<String, String> check(MemberFormBean bean) {
 		Map<String, String> errorMessage = new HashMap<>();
@@ -127,7 +167,20 @@ public class MemberService {
 			errorMessage.put("userTel", "電話欄位不可空白");
 		}
 
+		/**
+		 * 找到email判斷資料庫裡面是否有值 如果已經有值就回傳錯誤訊息
+		 */
+		MemberBean memberEmail = memberDao.getMemberByEmail(email);
+		if (memberEmail != null) {
+			errorMessage.put("email", "電子信箱重複,請重新輸入");
+
+		}
+
 		return errorMessage;
 	}
+
+	/**
+	 * 從資料庫拿到password進行加密
+	 */
 
 }

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +26,7 @@ public class MemberDao extends BaseDao {
 			conn = getConnection(); // 透過父類別取得連線
 			/***** *****/
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT USER_OID,USER_NAME,USER_LAST_NAME,USER_FIRST_NAME,USER_EMAIL,USER_PASSWD,");
+			sb.append("SELECT USER_LAST_NAME,USER_FIRST_NAME,USER_EMAIL,USER_PASSWD,");
 			sb.append("USER_MOBILE,USER_TEL_EXT,USER_TEL ");
 			sb.append("FROM SUSER WHERE USER_EMAIL=?");
 			String sqlQueryString = sb.toString();
@@ -37,9 +39,9 @@ public class MemberDao extends BaseDao {
 			while (rset.next()) {
 				for (int i = 1; i <= columnLength; i++) {
 					result = new MemberBean();
-					result.setUserName(rset.getString("USER_NAME"));
 					result.setuserLastName(rset.getString("USER_LAST_NAME"));
 					result.setUserFirstName(rset.getString("USER_FIRST_NAME"));
+					result.setUserEmail(rset.getString("USER_EMAIL"));
 					result.setUserPasswd(rset.getString("USER_PASSWD"));
 					result.setUserMobile(rset.getString("USER_MOBILE"));
 					result.setUserTelExt(rset.getString("USER_TEL_EXT"));
@@ -75,19 +77,44 @@ public class MemberDao extends BaseDao {
 		return result;
 	}
 
-	private String INSERTSQL = "INSERT INTO SUSER(USER_NAME,USER_EMAIL,USER_LAST_NAME,USER_FIRST_NAME,USER_PASSWD,"
-			+ "USER_MOBILE,USER_TEL,USER_TEL_EXT)" + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+	private String ALLMEMBERSQL = "SELECT * FROM SUSER";
+
+	public List<MemberBean> getAllMember() {
+		List<MemberBean> list = new ArrayList<>();
+		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(ALLMEMBERSQL)) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				MemberBean mb = new MemberBean();
+				mb.setuserLastName(rs.getString("USER_LAST_NAME"));
+				mb.setUserFirstName(rs.getString("USER_FIRST_NAME"));
+				mb.setUserEmail(rs.getString("USER_EMAIL"));
+				mb.setUserPasswd(rs.getString("USER_PASSWD"));
+				mb.setUserMobile(rs.getString("USER_MOBILE"));
+				mb.setUserTelExt(rs.getString("USER_TEL_EXT"));
+				mb.setUserTel(rs.getString("USER_TEL"));
+
+				list.add(mb);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	private String INSERTSQL = "INSERT INTO SUSER(USER_EMAIL,USER_LAST_NAME,USER_FIRST_NAME,USER_PASSWD,"
+			+ "USER_MOBILE,USER_TEL,USER_TEL_EXT)" + " values (?, ?, ?, ?, ?, ?, ?)";
 
 	public void insertUser(MemberBean bean) {
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(INSERTSQL)) {
 			stmt.setString(1, bean.getUserEmail());
-			stmt.setString(2, bean.getUserEmail());
-			stmt.setString(3, bean.getuserLastName());
-			stmt.setString(4, bean.getUserFirstName());
-			stmt.setString(5, bean.getUserPasswd());
-			stmt.setString(6, bean.getUserMobile());
-			stmt.setString(7, bean.getUserTel());
-			stmt.setString(8, bean.getUserTelExt());
+			stmt.setString(2, bean.getuserLastName());
+			stmt.setString(3, bean.getUserFirstName());
+			stmt.setString(4, bean.getUserPasswd());
+			stmt.setString(5, bean.getUserMobile());
+			stmt.setString(6, bean.getUserTel());
+			stmt.setString(7, bean.getUserTelExt());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

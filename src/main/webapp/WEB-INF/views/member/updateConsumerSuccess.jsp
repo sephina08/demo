@@ -9,6 +9,6 @@
 </head>
 <body>
 <h1>編輯消費者會員資料成功</h1>
-<a href="home.jsp">回首頁</a>
+<a href="memberIndex">回會員首頁</a>
 </body>
 </html>

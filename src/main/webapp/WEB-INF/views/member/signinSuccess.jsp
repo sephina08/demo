@@ -10,6 +10,7 @@
 <body>
 	<h1>恭喜您成為會員</h1>
 	<h2>電子信箱${email}的資料申請成功</h2>
+	<a href="memberIndex">回會員首頁</a>
 	<br>
 	
 </body>

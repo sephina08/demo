@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 public class MemberBean {
 	int userOid;
-	String userName;
 	String userLastName;
 	String userFirstName;
 	String userEmail;
@@ -15,19 +14,7 @@ public class MemberBean {
 	String userMobile;
 	String userTel;
 	String userTelExt;
-	String farmerZipCode;
-	String farmerAddress;
-	String farmerMobile;
-	String farmerTel;
-	String farmerTelExt;
-	String farmerProfile;
-	String farmerBnkCode;
-	String farmerBnkAcctno;
-	// Clob farmerProfile;
-
-	Timestamp userLastLoginTime;
-	Timestamp userApplyDate;
-	String userEmailValCode;
+	
 
 	public MemberBean() {
 		super();
@@ -38,23 +25,8 @@ public class MemberBean {
 		this.userEmail = userEmail;
 	}
 
-	public MemberBean(String userName, String userEmail, String userPasswd) {
-		super();
-		this.userName = userName;
-		this.userEmail = userEmail;
-		this.userPasswd = userPasswd;
-	}
+	
 
-	public MemberBean(String userName, String userEmail, String userPasswd, Timestamp userApplyDate) {
-		this(userName, userEmail, userPasswd);
-		this.userApplyDate = userApplyDate;
-	}
-
-	public MemberBean(String userEmail, String farmerProfile) {
-		super();
-		this.userEmail = userEmail;
-		this.farmerProfile = farmerProfile;
-	}
 
 	public int getUserOid() {
 		return userOid;
@@ -64,29 +36,7 @@ public class MemberBean {
 		this.userOid = userOid;
 	}
 
-	public String getFarmerBnkCode() {
-		return farmerBnkCode;
-	}
-
-	public void setFarmerBnkCode(String farmerBnkCode) {
-		this.farmerBnkCode = farmerBnkCode;
-	}
-
-	public String getFarmerBnkAcctno() {
-		return farmerBnkAcctno;
-	}
-
-	public void setFarmerBnkAcctno(String farmerBnkAcctno) {
-		this.farmerBnkAcctno = farmerBnkAcctno;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+	
 
 	public String getUserEmail() {
 		return userEmail;
@@ -152,79 +102,7 @@ public class MemberBean {
 		this.userTelExt = userTelExt;
 	}
 
-	public String getFarmerZipCode() {
-		return farmerZipCode;
-	}
-
-	public void setFarmerZipCode(String farmerZipCode) {
-		this.farmerZipCode = farmerZipCode;
-	}
-
-	public String getFarmerAddress() {
-		return farmerAddress;
-	}
-
-	public void setFarmerAddress(String farmerAddress) {
-		this.farmerAddress = farmerAddress;
-	}
-
-	public String getFarmerMobile() {
-		return farmerMobile;
-	}
-
-	public void setFarmerMobile(String farmerMobile) {
-		this.farmerMobile = farmerMobile;
-	}
-
-	public String getFarmerTel() {
-		return farmerTel;
-	}
-
-	public void setFarmerTel(String farmerTel) {
-		this.farmerTel = farmerTel;
-	}
-
-	public String getFarmerTelExt() {
-		return farmerTelExt;
-	}
-
-	public void setFarmerTelExt(String farmerTelExt) {
-		this.farmerTelExt = farmerTelExt;
-	}
-
-	public String getFarmerProfile() {
-		return farmerProfile;
-	}
-
-	public void setFarmerProfile(String farmerProfile) {
-		this.farmerProfile = farmerProfile;
-	}
-
-	public Timestamp getUserLastLoginTime() {
-		return userLastLoginTime;
-	}
-
-	public void setUserLastLoginTime(Timestamp userLastLoginTime) {
-		// 這個物件的屬性等於這個參數
-		this.userLastLoginTime = userLastLoginTime;
-	}
-
-	public Timestamp getUserApplyDate() {
-		return userApplyDate;
-	}
-
-	public void setUserApplyDate(Timestamp userApplyDate) {
-		this.userApplyDate = userApplyDate;
-	}
-
-	public String getUserEmailValCode() {
-		return userEmailValCode;
-	}
-
-	public void setUserEmailValCode(String userEmailValCode) {
-		this.userEmailValCode = userEmailValCode;
-	}
-
+	
 	public String getuserLastName() {
 		return userLastName;
 	}

@@ -10,7 +10,8 @@
 <body>
 	<h1>新增商品</h1>
 
-	<form action="addProduct2" method="POST" enctype="multipart/form-data" >
+<!-- 	<form action="addProduct2" method="POST" enctype="multipart/form-data" > -->
+	<form action="addProduct2" method="POST">
 		
 		1.商品名稱:
 		<input type="text" name="pName">

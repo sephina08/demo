@@ -1,7 +1,5 @@
 package com.ntut.practice.demo.model.product;
 
-import java.sql.Blob;
-
 public class ProductFormBean {
 	
 	private String pName;
@@ -11,8 +9,6 @@ public class ProductFormBean {
 	private Integer sNumber;
 	private String iName;
 	private String pImage;
-	
-	
 	
 	public ProductFormBean() {
 		super();
