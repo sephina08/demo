@@ -1,20 +1,37 @@
 package com.ntut.practice.demo.model.member;
 
-import java.sql.Timestamp;
 
 public class MemberBean {
 	int userOid;
-	String userLastName;
-	String userFirstName;
-	String userEmail;
-	String userPasswd;
-	String userStatus;
-	String userZipCode;
-	String userAddress;
-	String userMobile;
-	String userTel;
-	String userTelExt;
+	private String userLastName;
+	private String userFirstName;
+	private String userEmail;
+	private String userPasswd;
+	private String userAddress;
+	private String userMobile;
+	private String userTel;
+	private String userTelExt;
+	private String userInterests;
+	private String userJobs;
+	private String userCity;
+	private String userZone;
 	
+	
+	public String getUserLastName() {
+		return userLastName;
+	}
+
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
+	}
+
+	public String getUserInterests() {
+		return userInterests;
+	}
+
+	public void setUserInterests(String userInterests) {
+		this.userInterests = userInterests;
+	}
 
 	public MemberBean() {
 		super();
@@ -54,21 +71,7 @@ public class MemberBean {
 		this.userPasswd = userPasswd;
 	}
 
-	public String getUserStatus() {
-		return userStatus;
-	}
-
-	public void setUserStatus(String userStatus) {
-		this.userStatus = userStatus;
-	}
-
-	public String getUserZipCode() {
-		return userZipCode;
-	}
-
-	public void setUserZipCode(String userZipCode) {
-		this.userZipCode = userZipCode;
-	}
+	
 
 	public String getUserAddress() {
 		return userAddress;
@@ -118,5 +121,31 @@ public class MemberBean {
 	public void setUserFirstName(String userFirstName) {
 		this.userFirstName = userFirstName;
 	}
+
+	public String getUserJobs() {
+		return userJobs;
+	}
+
+	public void setUserJobs(String userJobs) {
+		this.userJobs = userJobs;
+	}
+
+	public String getUserCity() {
+		return userCity;
+	}
+
+	public void setUserCity(String userCity) {
+		this.userCity = userCity;
+	}
+
+	public String getUserZone() {
+		return userZone;
+	}
+
+	public void setUserZone(String userZone) {
+		this.userZone = userZone;
+	}
+
+
 
 }

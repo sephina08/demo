@@ -9,11 +9,21 @@
 </head>
 <body>
 	<form action="showMember" method="get">
-		<br> 電子信箱: <input name="email" type="text"
-			size="5" value="${param.email}"> <br>
+		<br> 
+		電子信箱: 
+		<input name="email" type="text" size="5" value="${param.email}">
+		 
+		<br>
+		
 		<div style="color: red; font-size: 60%">${errorMessage}</div>
-		<input type="submit" value="確認輸入"> <input type="reset"
-			value="重新輸入"><br>
+		
+		<br><br><br>
+		
+		<input type="button" value="上一頁" onclick="history.back()">
+		<input type="submit" value="確認輸入">
+		
+		<br>
+
 	</form>
 </body>
 </html>

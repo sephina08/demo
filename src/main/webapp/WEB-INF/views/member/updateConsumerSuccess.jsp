@@ -8,7 +8,10 @@
 <title>編輯消費者會員資料成功</title>
 </head>
 <body>
-<h1>編輯消費者會員資料成功</h1>
-<a href="memberIndex">回會員首頁</a>
+	<h1>編輯消費者會員資料成功</h1>
+	
+	<br><br>
+	
+	<a href="memberIndex">回會員首頁</a>
 </body>
 </html>

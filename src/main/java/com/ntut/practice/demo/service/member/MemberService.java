@@ -1,6 +1,7 @@
 package com.ntut.practice.demo.service.member;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ntut.practice.demo.Application;
 import com.ntut.practice.demo.dao.member.MemberDao;
 import com.ntut.practice.demo.model.member.MemberBean;
 import com.ntut.practice.demo.model.member.MemberFormBean;
@@ -20,6 +19,26 @@ import com.ntut.practice.demo.service.utils.ValidateService;
 public class MemberService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+
+	// TODO:
+	public static void main(String[] args) {
+		List<String> interestsCheckbox = new ArrayList<>();
+		interestsCheckbox.add("A");
+		interestsCheckbox.add("B");
+		interestsCheckbox.add("C");
+		interestsCheckbox.add("D");
+		System.out.println(interestsCheckbox);
+		String interests = null;
+		for (int i = 0; i < interestsCheckbox.size(); i++) {
+			if (i != 0) {
+				String b = "," + interestsCheckbox.get(i);
+				interests = b;
+			} else {
+				interests = interestsCheckbox.get(i);
+			}
+		}
+		System.out.println(interests);
+	}
 
 	@Autowired
 	private MemberDao memberDao;
@@ -40,6 +59,11 @@ public class MemberService {
 		memberFormBean.setMobile(bean.getUserMobile());
 		memberFormBean.setTel(bean.getUserTel());
 		memberFormBean.setTelExt(bean.getUserTelExt());
+		memberFormBean.setInterestsThroughComma(bean.getUserInterests());
+		memberFormBean.setJobs(bean.getUserJobs());
+		memberFormBean.setCity(bean.getUserCity());
+		memberFormBean.setZone(bean.getUserZone());
+		memberFormBean.setAddress(bean.getUserAddress());
 		return memberFormBean;
 	}
 
@@ -59,29 +83,22 @@ public class MemberService {
 			mfb.setMobile(mb.getUserMobile());
 			mfb.setTel(mb.getUserTel());
 			mfb.setTelExt(mb.getUserTelExt());
+			mfb.setCity(mb.getUserCity());
+			mfb.setZone(mb.getUserZone());
+			mfb.setAddress(mb.getUserAddress());
+			mfb.setInterestsThroughComma(mb.getUserInterests());
+			mfb.setJobs(mb.getUserJobs());
+
+			// String userInterests = mb.getUserInterests();
+			// String[] interests = userInterests.split(",");
+			// mfb.setInterests(Arrays.asList(interests));
+
 			result.add(mfb);
-//			Map<String, String> errorMessage = new HashMap<>();
-//			String email = mfb.getEmail();
-//			if (email == null || email.trim().length() == 0) {
-//				errorMessage.put("email", "電子信箱不存在");
-//			}
 
 		}
 		return result;
 
 	}
-
-	//
-	// //查詢使用者資料,檢查電子信箱是否存在
-	// public Map<String, String> checkEmail(MemberFormBean bean){
-	// Map<String, String> errorMessage = new HashMap<>();
-	// String email = bean.getEmail();
-	// if (email == null || email.trim().length() == 0) {
-	// errorMessage.put("email", "電子信箱不存在");
-	// }
-	// return errorMessage;
-	//
-	// }
 
 	// 修改會員
 	public int updateConsumer(MemberFormBean memberFormBean) {
@@ -89,10 +106,25 @@ public class MemberService {
 		bean.setUserEmail(memberFormBean.getEmail());
 		bean.setuserLastName(memberFormBean.getLastName());
 		bean.setUserFirstName(memberFormBean.getFirstName());
-		// bean.setUserAddress(memberFormBean.getAddress());
 		bean.setUserMobile(memberFormBean.getMobile());
 		bean.setUserTel(memberFormBean.getTel());
 		bean.setUserTelExt(memberFormBean.getTelExt());
+		bean.setUserJobs(memberFormBean.getJobs());
+		List<String> interestsCheckbox = memberFormBean.getInterests();
+		String interests = null;
+		if (interestsCheckbox != null && interestsCheckbox.size() > 0) {
+			for (int i = 0; i < interestsCheckbox.size(); i++) {
+				if (i != 0) {
+					interests += "," + interestsCheckbox.get(i);
+				} else {
+					interests = interestsCheckbox.get(i);
+				}
+			}
+		}
+		bean.setUserInterests(interests);
+		bean.setUserCity(memberFormBean.getCity());
+		bean.setUserZone(memberFormBean.getZone());
+		bean.setUserAddress(memberFormBean.getAddress());
 		int updateCount = memberDao.updateUser(bean);
 		LOGGER.debug("update count:{}", updateCount);
 		return updateCount;
@@ -108,11 +140,29 @@ public class MemberService {
 		bean.setUserPasswd(memberFormBean.getCheckPassword());
 		bean.setuserLastName(memberFormBean.getLastName());
 		bean.setUserFirstName(memberFormBean.getFirstName());
-		// bean.setUserAddress(memberFormBean.getAddress());
 		bean.setUserMobile(memberFormBean.getMobile());
 		bean.setUserTel(memberFormBean.getTel());
 		bean.setUserTelExt(memberFormBean.getTelExt());
+		/**
+		 * 使用者填選完興趣後用List集合包裝起來, 但因為資料庫欄位是字串,多筆資料要逗號隔開,所以要手動轉換
+		 */
+		List<String> interestsCheckbox = memberFormBean.getInterests();
+		String interests = null;
+		if (interestsCheckbox != null && interestsCheckbox.size() > 0) {
+			for (int i = 0; i < interestsCheckbox.size(); i++) {
+				if (i != 0) {
+					interests += "," + interestsCheckbox.get(i);
+				} else {
+					interests = interestsCheckbox.get(i);
+				}
+			}
+		}
 
+		bean.setUserJobs(memberFormBean.getJobs());
+		bean.setUserInterests(interests);
+		bean.setUserCity(memberFormBean.getCity());
+		bean.setUserZone(memberFormBean.getZone());
+		bean.setUserAddress(memberFormBean.getAddress());
 		memberDao.insertUser(bean);
 	}
 
@@ -157,6 +207,11 @@ public class MemberService {
 		String userFirstName = bean.getFirstName();
 		if (userFirstName == null || userFirstName.trim().length() == 0) {
 			errorMessage.put("userFirstName", "名字欄位不可空白");
+		}
+		String userAddress = bean.getAddress();
+		if (userAddress == null || userAddress.trim().length() == 0) {
+			errorMessage.put("userAddress", "地址欄位不可空白");
+
 		}
 		String userMobile = bean.getMobile();
 		if (userMobile == null || userMobile.trim().length() == 0) {
