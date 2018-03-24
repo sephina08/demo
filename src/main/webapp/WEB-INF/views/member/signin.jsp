@@ -75,7 +75,7 @@
 		<input type="checkbox" value="${checkbox.interestValue}" name="interests">${checkbox.interestDesc}
 	</c:forEach>	
 	
-	<br><br> 
+	<br><br>
 	
 	職位:
 	<select name='jobs'>
@@ -87,7 +87,7 @@
 	
 	<br><br><br>
 	
-	<input type="button" value="上一頁" onclick="history.back()">
+	<button type="button" id="backBbtn">上一頁</button>
 
 	<input type="submit" value="確認申請">
 
@@ -97,6 +97,14 @@
 </body>
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#backBbtn').click(function(){
+		location='/member/memberIndex';	
+		});
+});
+
+
+
 
 //ajax只發送請求,不刷頁(當使用者選擇欄位時發送request請求,使用者不會知道,在背後端發送請求)
 	$(document).ready(function(){	

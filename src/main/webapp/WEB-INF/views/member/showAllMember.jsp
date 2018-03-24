@@ -26,7 +26,7 @@
 			</tr>
 			<c:forEach var='memberFormBean' items="${memberFormBeanList}">
 				<tr>
-					<td><a href='showMember?email=${memberFormBean.email}'>${memberFormBean.email}</a></td>
+					<td><a href='showMember?email=${memberFormBean.email}&zone=${memberFormBean.zone}'>${memberFormBean.email}</a></td>
 					<td>${memberFormBean.lastName}</td>
 					<td>${memberFormBean.firstName}</td>
 
@@ -78,9 +78,8 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script type="text/javascript">
-	//當畫面準備完成時, 才會執行此區塊的程式碼. 一般來說也是正常的 jquery 起手式
-	//如果使用者按下了確定按鈕,詢問確認是否刪除
-	//form標籤裡面的action轉換成deleteMember submit出去
+
+
 	$(document).ready(function(){
 	    $('#backBtn').click(function() {
 		    window.location = '/member/memberIndex';

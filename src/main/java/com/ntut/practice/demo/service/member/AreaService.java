@@ -33,8 +33,8 @@ public class AreaService {
 
 	}
 
-	public List<ZoneBean> getZoneParentByZoneOid(String zoneOid) {
-		return zoneDao.getZoneByParentId(zoneOid);
+	public List<ZoneBean> getZoneParentByZoneOid(String zone) {
+		return zoneDao.getZoneParentByZoneOid(zone);
 
 	}
 }

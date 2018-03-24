@@ -41,19 +41,19 @@
 					</c:if>
 				</c:forEach>
 			</select>
-		</div>
 		
 		<select name='zone' >
-			<c:forEach var='zoneParent' items='${zoneParent}'>
-				<c:if test="${zoneParent.zoneParent eq memberFormBean.zone}">
-					<option value="${zoneParent.zoneParent}" selected>selectBoxCity.cityName</option>
-				</c:if>
-			
+			<c:forEach var='zoneList' items='${zoneList}'>
+				<c:if test="${zoneList.zoneOid eq memberFormBean.zone}">
+					<option value="${zoneList.zoneOid}" selected>${zoneList.zoneName}</option>
+				</c:if>	
+				<c:if test="${zoneList.zoneOid ne memberFormBean.zone}">
+					<option value="${zoneList.zoneOid}">${zoneList.zoneName}</option>
+				</c:if>			
 			</c:forEach>
-		
 		</select>
-		
-		<input name="address" type="text" size="15" value=${memberFormBean.address}>
+		</div>
+		<input name="address" type="text" size="30" value=${memberFormBean.address}>
 		
 		<br><br>
 		
@@ -87,7 +87,7 @@
 
 		<select name='jobs'>
 			<option value=''>請選擇</option>
-			<c:forEach var='selectBox' items="${selectBoxs}" varStatus="status">
+			<c:forEach var='selectBox' items="${selectBoxs}" >
 				<c:if test="${not empty memberFormBean.jobs}">
 					<c:choose>
 						<c:when test="${memberFormBean.jobs eq selectBox.jobValue}">
@@ -107,11 +107,7 @@
 		<br><br><br> 
 		
 			<input type="submit" value="確認修改"> 
-			<!--  
-			<input class="delete" type="button" value="刪除會員"
-			onclick="confirmDelete('${memberFormBean.email}')"
-			style="background-color: pink;"> 
-			-->
+		
 <!-- 			button按紐除了ie會自動執行submit的方式,所以要加type="button"才不會自動刷頁 -->
 			<button id="deleteBtn" type="button" style="background-color: pink;"> 刪除會員 </button>
 			

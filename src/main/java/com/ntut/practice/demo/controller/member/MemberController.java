@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -129,7 +130,7 @@ public class MemberController {
 	 * @return TODO: @RequestParam("email") 放到參數上(如果前端有改變只要改這裡就好了)
 	 */
 	@GetMapping("showMember")
-	public ModelAndView select(@RequestParam("email") String email) {
+	public ModelAndView select(@RequestParam("email") String email, String zone) {
 		ModelAndView mav = null;
 		try {
 			MemberFormBean bean = memberService.getMemberByEmail(email);
@@ -141,16 +142,19 @@ public class MemberController {
 //			List<String> interestesList = Arrays.asList(interestesArray);
 //			bean.setInterests(interestesList);
 			
-//			List<ZoneBean> zoneParentByZoneOid = areaService.getZoneParentByZoneOid(zoneOid);
 			List<InterestBean> allInterests = interestService.getAllInterest();
 			List<JobBean> allJob = jobService.getAllJob();
 			List<CityBean> allCity = areaService.getAllCity();
+			List<ZoneBean> zoneParentByZoneOid = areaService.getZoneParentByZoneOid(zone);
+//			for(ZoneBean z :zoneParentByZoneOid){
+//				System.out.println(z.getZoneName());
+//			}
 			mav = new ModelAndView("member/updateConsumer");
 			mav.addObject("memberFormBean", bean);
 			mav.addObject("checkboxes", allInterests);
 			mav.addObject("selectBoxs",allJob);
 			mav.addObject("selectBoxCity",allCity);
-//			mav.addObject("zoneParent",zoneParentByZoneOid);
+			mav.addObject("zoneList",zoneParentByZoneOid);
 		} catch (Exception e) {
 			mav = new ModelAndView("member/showMember");
 			if (StringUtils.isBlank(email)) {
@@ -204,8 +208,6 @@ public class MemberController {
 	@GetMapping("deleteMember")
 	public String deleteMember(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
 		memberService.delectMember(email);
-//		ModelAndView mv = new ModelAndView("member/memberIndex");
-//		mv.addObject("message", "刪除會員成功");
 		redirectAttributes.addFlashAttribute("message", "刪除會員成功");//addFlashAttribute一次性的儲存在session裡面,導頁之後會自動把session刪除
 		return "redirect:/member/memberIndex";
 	}
@@ -217,10 +219,5 @@ public class MemberController {
 	}
 	
 	
-	@GetMapping("getZoneParentByZoneOid")
-	public List<ZoneBean> getZoneParentByZoneOid(@RequestParam("zoneParent") String zoneOid){
-		return areaService.getZoneParentByZoneOid(zoneOid);
-		
-	}
 	
 }
