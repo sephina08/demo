@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,15 +19,14 @@ import com.ntut.practice.demo.service.product.ProductService;
 // URL輸入的值 add (add = product)
 // 預設使用是GET方法
 @RequestMapping(value = "add")
-
 public class ProductController {
+	
 	@Autowired
 	ProductService productService;
 
 	/*
 	 * URL輸入的值 product (productd = productAdd) 如果要用URL導頁一定要用GET
 	 */
-
 	@RequestMapping(value = "product") /* 第二個參數 method = RequestMethod.GET */
 	// ↓此方法導入聲請帳號的頁面
 	public String productAdd() {
@@ -57,19 +55,15 @@ public class ProductController {
 	// return mav;
 	 }
 
-	
-	
 	@PostMapping("addProduct2")
-	public ModelAndView testP(String productName, String productNumber, String price, String productDesc,
-			String stockNumber, String imageName, /*String productImage,*/ HttpServletRequest request,
-			HttpServletResponse response, Model model) {
+	public ModelAndView testP(HttpServletRequest request, HttpServletResponse response) {
 
-		productName = request.getParameter("pNumber");
-		productNumber = request.getParameter("pName");
-		price = request.getParameter("price");
-		productDesc = request.getParameter("pDesc");
-		stockNumber = request.getParameter("sNumber");
-		imageName = request.getParameter("iName");
+		String productName = request.getParameter("pNumber");
+		String productNumber = request.getParameter("pName");
+		String price = request.getParameter("price");
+		String productDesc = request.getParameter("pDesc");
+		String stockNumber = request.getParameter("sNumber");
+		String imageName = request.getParameter("iName");
 		
 		/*productImage = request.getParameter("pImage");*/
 
