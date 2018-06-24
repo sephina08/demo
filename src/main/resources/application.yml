@@ -8,12 +8,11 @@ spring:
   mvc: 
     view: 
       prefix: /WEB-INF/views/
-      suffix: .jsp
+      suffix: .html
 
 project:
     page:
       index: index
-      error: err
 
 jdbc:
   driverClassName: com.mysql.jdbc.Driver
