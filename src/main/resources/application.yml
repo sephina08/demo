@@ -1,7 +1,8 @@
 #default url : localhost:port
 server:
   port: 8090
-      
+#  contextPath: /orm
+
 spring: 
   application: 
     name: Demo project
