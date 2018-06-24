@@ -8,11 +8,15 @@ spring:
   mvc: 
     view: 
       prefix: /WEB-INF/views/
-      suffix: .html
+      suffix: .jsp
 
 project:
     page:
       index: index
+
+mybatis:
+  type-aliases-package: com.ntut.practice.demo.entity
+  mapper-locations: classpath:mapper/*.xml
 
 jdbc:
   driverClassName: com.mysql.jdbc.Driver

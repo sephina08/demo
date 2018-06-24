@@ -15,7 +15,7 @@
     <logger name="org.springframework.test" level="INFO"/>
     <logger name="com.ntut.practice.demo" level="DEBUG"/>
 
-    <root level="INFO">
+    <root level="debug">
         <appender-ref ref="STDOUT"/>
     </root>
 

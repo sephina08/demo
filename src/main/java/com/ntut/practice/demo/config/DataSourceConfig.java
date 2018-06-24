@@ -2,6 +2,7 @@ package com.ntut.practice.demo.config;
 
 import com.ntut.practice.demo.config.prop.JdbcConfig;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
+@MapperScan("com.ntut.practice.demo.dao")
 public class DataSourceConfig {
 
     @Autowired
