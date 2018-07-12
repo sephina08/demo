@@ -1,12 +1,14 @@
 package com.ntut.practice.demo.entity;
 
+import java.math.BigDecimal;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Member {
-	private int sid;
+	private BigDecimal sid;
 	private String name;
 	/**
 	 * 0:girl 1:boy
@@ -17,5 +19,9 @@ public class Member {
 	private String phone;
 	private String birthday;
 	private String workingday;
+	private String cityId;
+	private String zoneId;
+	private String interests;
+	
 
 }

@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+input[type="text"].invalid-input{
+	border:1px solid red;
+	color:red;
+}

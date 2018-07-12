@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * 註冊首頁用, 請勿在此加任何控制頁面相關邏輯
+ * 控制頁面相關邏輯
  */
 @Controller
 public class CommonController {
@@ -32,7 +32,31 @@ public class CommonController {
 	@GetMapping("homeMember")
 	public String homeMember(){
 		return "member/homeMember";
-		
 	}
 
+	/**
+	 * 導到新增會員頁面
+	 */
+	@GetMapping("createMemberPage")
+	public String createMemberPage(){
+		return "member/createMember";
+	}
+	
+	/**
+	 * 導到查看會員頁面
+	 */
+	@GetMapping("selectMemberPage")
+	public String selectMemberPage(){
+		return "member/selectMember";
+		
+	}
+	
+	/**
+	 * 導到編輯會員頁面
+	 */
+	@GetMapping("editMemberPage")
+	public String editMemberPage(){
+		return "member/editMember";
+		
+	}
 }

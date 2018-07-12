@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ntut.practice.demo.dao.MemberMapper">
-<!-- 查詢全部 -->
+<!-- 查詢全部會員資料 -->
     <select id="selectAll" resultType="com.ntut.practice.demo.entity.Member">
       select * from member
     </select>
 <!--用pk找資料(一對一) -->
-    <select id="selectById" resultType="com.ntut.practice.demo.entity.Member" parameterType="java.lang.Integer">
+    <select id="selectById" resultType="com.ntut.practice.demo.entity.Member" parameterType="Integer">
     	select * from member where sid=#{sid}
     </select>
 <!--用條件查詢資料 -->
@@ -19,5 +19,81 @@
 		  <if test="name != null and name !=''">
 		  	and name=#{name}
 		  </if>
+		  <if test="phone != null and phone !=''">
+		    and phone=#{phone}
+		  </if>
+		  <if test="workingday != null and workingday !=''">
+		  	and workingday=#{workingday}
+		  </if>
     </select>
+    
+ <!--新增會員 -->
+    <insert id="insertMember" parameterType="com.ntut.practice.demo.entity.Member">
+    	insert into member(name,gender,email,cityId,zoneId,address,phone,birthday,workingday,interests)
+    	values(
+    		#{name,jdbcType=VARCHAR},#{gender,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
+    		#{cityId,jdbcType=VARCHAR},#{zoneId,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},
+    		#{phone,jdbcType=VARCHAR},#{birthday,jdbcType=VARCHAR},#{workingday,jdbcType=VARCHAR},
+    		#{interests,jdbcType=VARCHAR}  	
+    	)
+    </insert>
+    
+ <!--查全部縣市下拉式選單(AS改變欄位名稱) -->  
+    <select id="selectCity" resultType="com.ntut.practice.demo.entity.City">
+    	SELECT oid AS oid, name AS name
+		FROM city
+    </select>
+    
+ <!--查全部區域下拉式選單 -->  
+    <select id="selectZone" resultType="com.ntut.practice.demo.entity.Zone">
+    	SELECT *
+		FROM zone
+    </select>   
+    
+    
+<!--使用者選擇縣市後回傳相對區域 -->
+	<select id="selectZoneByCityId" resultType="com.ntut.practice.demo.entity.Zone" parameterType="Map">
+		SELECT oid,cityOid,NAME FROM zone WHERE 
+		cityOid=(SELECT oid FROM city WHERE oid=#{cityOid})
+	</select>
+
+<!-- 找全部興趣的checkbox -->
+	<select id="selectAllInterests" resultType="com.ntut.practice.demo.entity.Interests">
+		SELECT * FROM interests
+	</select>
+
+<!-- 刪除一筆或刪除多筆 -->
+<!-- parameterType 回傳的參數型別 -->
+
+<!-- separator:每兩次循環中間拼接的串 item:每次循環取到的對象(對應collection的變數) 
+	 open:開始循環拼接的字串 
+	 close:結束循環拼接的字串
+	 collection:集合的屬性(從JavaMapper傳進來的參數) -->
+	<delete id="deleteMember" parameterType="String">
+		delete from member
+		where 1=1
+		<if test="sids!=null and sids.size()">
+			and sid in
+			<foreach collection="sids" index="index" item="sid" open="("
+				separator="," close=")">
+				#{sid}
+			</foreach>
+		</if>
+	</delete>
+<!-- 修改會員  -->
+<update id="editMemeber" parameterType="com.ntut.practice.demo.entity.Member">
+	update member set
+	name = #{name,jdbcType=VARCHAR},
+	gender = #{gender,jdbcType=VARCHAR},
+	email = #{email,jdbcType=VARCHAR},
+	address = #{address,jdbcType=VARCHAR},
+	phone = #{phone,jdbcType=VARCHAR},
+	birthday = #{birthday,jdbcType=VARCHAR},
+	workingday = #{workingday,jdbcType=VARCHAR},
+	cityId = #{cityId,jdbcType=VARCHAR},
+	zoneId = #{zoneId,jdbcType=VARCHAR},
+	interests = #{interests,jdbcType=VARCHAR}
+	where sid = #{sid,jdbcType=DECIMAL}
+
+</update>
 </mapper>
